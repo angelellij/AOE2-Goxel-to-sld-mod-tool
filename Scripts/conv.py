@@ -178,15 +178,15 @@ def paint_single_dmg_px(pixels, px_dmg, xy, x, y, i_dmg):
 
 def modify_all_png():
     start_path = f'{DIRS.MAIN}/{DIRS.PNG_RAW}/'
-    # for i in range(0,5):
-    #     path = f'{start_path}{i+1}x{i+1}/'
-    #     for filename in os.listdir(path):
-    #         if filename.endswith(".png"): replace_semi_transparent_pixels(path + filename, i+1)
+    for i in range(0,5):
+        path = f'{start_path}{i+1}x{i+1}/'
+        for filename in os.listdir(path):
+            if filename.endswith(".png"): replace_semi_transparent_pixels(path + filename, i+1)
    
     #custom for 2X1
-    path = f'{start_path}2x1/'
-    for filename in os.listdir(path):
-        if filename.endswith(".png"): replace_semi_transparent_pixels(path + filename, 2, 1)
+    # path = f'{start_path}2x1/'
+    # for filename in os.listdir(path):
+    #     if filename.endswith(".png"): replace_semi_transparent_pixels(path + filename, 2, 1)
 
 if __name__ == "__main__":
     modify_all_png()
