@@ -123,10 +123,13 @@ def build_and_install(building_name, tile_size=None, mod_name=DIRS.MOD_SLD_TEST,
             margin = config.get("margin", 0)
             gox_name = config.get("gox") or building_name
             model = None
-            if config.get("box_from"):
+            if config.get("box_from") or config.get("rotate_90"):
                 from gox_reader import read_gox
                 model = read_gox(f"{DIRS.MAIN}/{DIRS.GOX}/{gox_name}.gox")
-                model.box = read_gox(f"{DIRS.MAIN}/{DIRS.GOX}/{config['box_from']}.gox").box
+                if config.get("box_from"):
+                    model.box = read_gox(f"{DIRS.MAIN}/{DIRS.GOX}/{config['box_from']}.gox").box
+                if config.get("rotate_90"):
+                    model.voxels = build_psd._rotate_voxels_90(model.voxels)
             layers = build_psd.build_layers(
                 building_name, tile_size, angle_x=angle_x, angle_y=angle_y, margin=margin, gox_name=gox_name,
                 model=model, debug_dir=debug_dir,
@@ -301,7 +304,7 @@ def build_and_install_foundation(building_name, mod_name=DIRS.MOD_SLD_TEST, f_ke
         raise ValueError(f"no config for {building_name!r} - run gen_building_config.py")
     tile_size = config["tile_size"]
     angle_x = config.get("camera_angle_x", 60)
-    angle_y = config.get("camera_angle_y", 45)
+    angle_y = f_config.get("camera_angle_y", config.get("camera_angle_y", 45))
     margin = config.get("margin", 0)
 
     stage_repeat = config.get("frame_count", 1) if f_config.get("wall_style") else 1
@@ -317,6 +320,7 @@ def build_and_install_foundation(building_name, mod_name=DIRS.MOD_SLD_TEST, f_ke
             stage_fractions=f_config.get("stage_fractions"),
             base_frame=f_config.get("base_frame", True),
             stage_extra_levels=f_config.get("stage_extra_levels", 0),
+            rotate_90=f_config.get("rotate_90", False),
         )
         stage_paths = []
         stage_guides = []

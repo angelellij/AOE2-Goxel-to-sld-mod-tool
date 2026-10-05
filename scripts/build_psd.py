@@ -184,12 +184,12 @@ def build_destruction_frames(building_name, tile_size, num_frames=5, angle_x=60,
 
 def build_foundation_frames(
     building_name, tile_size, angle_x=60, angle_y=45, foundation_name=None, margin=0, include_full_stage=False,
-    construction_gox=None, footprint=None, stage_fractions=None, base_frame=True, stage_extra_levels=0,
+    construction_gox=None, footprint=None, stage_fractions=None, base_frame=True, stage_extra_levels=0, rotate_90=False,
 ):
     if footprint is not None and construction_gox:
         base = _foundation_frames(building_name, tile_size, angle_x, angle_y, foundation_name, margin,
                                   include_full_stage, construction_gox, footprint, shift_y=0,
-                                  stage_fractions=stage_fractions, base_frame=base_frame, stage_extra_levels=stage_extra_levels)
+                                  stage_fractions=stage_fractions, base_frame=base_frame, stage_extra_levels=stage_extra_levels, rotate_90=rotate_90)
         sil = np.array(base[0]["silhouette"]) > 0
         dm = np.array(base[0]["diamond"]) > 0
         diffs = [np.nonzero(sil[:, x])[0].max() - np.nonzero(dm[:, x])[0].max()
@@ -197,10 +197,10 @@ def build_foundation_frames(
         dy = -round(float(np.median(diffs)))
         return _foundation_frames(building_name, tile_size, angle_x, angle_y, foundation_name, margin,
                                   include_full_stage, construction_gox, footprint, shift_y=dy,
-                                  stage_fractions=stage_fractions, base_frame=base_frame, stage_extra_levels=stage_extra_levels)
+                                  stage_fractions=stage_fractions, base_frame=base_frame, stage_extra_levels=stage_extra_levels, rotate_90=rotate_90)
     return _foundation_frames(building_name, tile_size, angle_x, angle_y, foundation_name, margin,
                               include_full_stage, construction_gox, footprint, shift_y=0,
-                              stage_fractions=stage_fractions, base_frame=base_frame, stage_extra_levels=stage_extra_levels)
+                              stage_fractions=stage_fractions, base_frame=base_frame, stage_extra_levels=stage_extra_levels, rotate_90=rotate_90)
 
 
 def _staged_voxels(voxels, fraction, extra_levels=0):
@@ -213,13 +213,30 @@ def _staged_voxels(voxels, fraction, extra_levels=0):
     return out
 
 
+def _rotate_voxels_90(voxels):
+    """Rotates voxels 90 degrees in the xy plane (z unchanged) around the
+    center of their own xy bounding box, so a square footprint maps onto
+    itself and the model stays centered on it."""
+    xs = [p[0] for p in voxels]
+    ys = [p[1] for p in voxels]
+    cx, cy = (min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2
+    out = {}
+    for (x, y, z), color in voxels.items():
+        nx = cx - (y - cy)
+        ny = cy + (x - cx)
+        out[(int(round(nx)), int(round(ny)), z)] = color
+    return out
+
+
 def _foundation_frames(building_name, tile_size, angle_x, angle_y, foundation_name, margin,
                        include_full_stage, construction_gox, footprint, shift_y,
-                       stage_fractions=None, base_frame=True, stage_extra_levels=0):
+                       stage_fractions=None, base_frame=True, stage_extra_levels=0, rotate_90=False):
     foundation_name = foundation_name or building_name
     import building_config
     living_gox = construction_gox or (building_config.load(building_name) or {}).get("gox") or building_name
     living_model = read_gox(f"{DIRS.MAIN}/{DIRS.GOX}/{living_gox}.gox")
+    if rotate_90:
+        living_model = GoxModel(voxels=_rotate_voxels_90(living_model.voxels), box=living_model.box)
     if construction_gox:
         foundation_name = construction_gox
     living_passes = voxel_render.render(living_model, angle_x=angle_x, angle_y=angle_y)

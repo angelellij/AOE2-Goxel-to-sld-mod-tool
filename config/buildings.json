@@ -630,7 +630,8 @@
     "tile_size": 2,
     "destruction_targets": [
       "b_dark_gate_palisade_n_destruction_x1"
-    ]
+    ],
+    "rotate_90": true
   },
   "palisade22_open": {
     "area_prefix": null,
@@ -644,7 +645,8 @@
     "targets": [
       "b_dark_gate_palisade_n_open_x1"
     ],
-    "tile_size": 2
+    "tile_size": 2,
+    "rotate_90": true
   },
   "palisade2_closed": {
     "area_prefix": null,
@@ -1293,7 +1295,8 @@
       0.25,
       0.5,
       0.75
-    ]
+    ],
+    "rotate_90": true
   },
   "stone2_closedf": {
     "area_prefix": "areas",
