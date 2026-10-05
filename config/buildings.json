@@ -1,0 +1,1508 @@
+{
+  "archery2": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "archery2",
+    "margin": 10,
+    "targets": [
+      "archery_range_age2_x1"
+    ],
+    "tile_size": 3
+  },
+  "archery3": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "archery3",
+    "margin": 10,
+    "targets": [
+      "archery_range_age3_x1"
+    ],
+    "tile_size": 3
+  },
+  "archeryf": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_misc_foundation_archery_range_x1"
+    ]
+  },
+  "barracks": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "barracks",
+    "margin": 10,
+    "targets": [
+      "b_dark_barracks_age1_x1"
+    ],
+    "tile_size": 3
+  },
+  "barracks2": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "barracks2",
+    "margin": 10,
+    "targets": [
+      "barracks_age2_x1"
+    ],
+    "tile_size": 3
+  },
+  "barracks3": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "barracks3",
+    "margin": 10,
+    "targets": [
+      "barracks_age3_x1"
+    ],
+    "tile_size": 3
+  },
+  "barracksf": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_misc_foundation_barracks_x1"
+    ]
+  },
+  "blacksmith2": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "blacksmith2",
+    "margin": 10,
+    "targets": [
+      "blacksmith_age2_x1"
+    ],
+    "tile_size": 3
+  },
+  "blacksmith3": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "blacksmith3",
+    "margin": 10,
+    "targets": [
+      "blacksmith_age3_x1"
+    ],
+    "tile_size": 3
+  },
+  "blacksmithf": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_misc_foundation_blacksmith_x1"
+    ]
+  },
+  "caravanserai": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "caravanserai",
+    "margin": 10,
+    "targets": [
+      "b_indi_caravanserai_age4_x1"
+    ],
+    "tile_size": 4
+  },
+  "castle": {
+    "area_prefix": "castle_areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "castle",
+    "margin": 0,
+    "targets": [
+      "castle_age3_x1"
+    ],
+    "tile_size": 4
+  },
+  "castlef": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_misc_foundation_castle_x1"
+    ]
+  },
+  "dock1": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 100,
+    "frame_count_is_variants": false,
+    "gox": "dock1",
+    "margin": 10,
+    "targets": [
+      "b_dark_dock_age1_x1"
+    ],
+    "tile_size": 3
+  },
+  "dock2": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 100,
+    "frame_count_is_variants": false,
+    "gox": "dock2",
+    "margin": 10,
+    "targets": [
+      "dock_age2_x1"
+    ],
+    "tile_size": 3
+  },
+  "dock3": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 100,
+    "frame_count_is_variants": false,
+    "gox": "dock3",
+    "margin": 10,
+    "targets": [
+      "dock_age3_x1"
+    ],
+    "tile_size": 3
+  },
+  "dock4": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 100,
+    "frame_count_is_variants": false,
+    "gox": "dock4",
+    "margin": 10,
+    "targets": [
+      "dock_age4_x1"
+    ],
+    "tile_size": 3
+  },
+  "dockf": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_misc_foundation_dock_x1"
+    ]
+  },
+  "donjon": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "donjon",
+    "margin": 10,
+    "targets": [
+      "b_medi_donjon_x1"
+    ],
+    "tile_size": 2
+  },
+  "donjonf": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_misc_foundation_donjon_x1"
+    ]
+  },
+  "empty": {
+    "area_prefix": null,
+    "camera_angle_x": null,
+    "camera_angle_y": null,
+    "destructible": false,
+    "empty": true,
+    "frame_count": 1,
+    "gox": null,
+    "targets": [
+      "b_dark_gate_palisade_flag_x1",
+      "b_dark_wall_palisade_flag_x1",
+      "b_dark_town_center_age1_front_x1",
+      "b_dark_town_center_age1_center_x1",
+      "b_dark_town_center_age1_back_x1",
+      "b_misc_snow_1_x1",
+      "b_misc_snow_2_x1",
+      "b_misc_snow_3_x1",
+      "b_misc_snow_4_x1",
+      "b_misc_snow_5_x1",
+      "b_misc_snow_6_x1",
+      "b_misc_snow_7_x1",
+      "b_misc_snow_8_x1",
+      "b_misc_snow_9_x1",
+      "b_misc_snow_10_x1",
+      "b_west_fortified_stone_flag_x1",
+      "b_west_gate_stone_flag_x1",
+      "b_west_gate_fortified_flag_x1",
+      "b_archaic_town_center_age1_front_x1",
+      "b_archaic_town_center_age1_center_x1",
+      "b_archaic_town_center_age1_back_x1",
+      "b_archaic_town_center_age1_shadow_x1"
+    ],
+    "tile_size": null
+  },
+  "empty2": {
+    "area_prefix": "areas",
+    "camera_angle_x": null,
+    "camera_angle_y": null,
+    "destructible": false,
+    "empty": true,
+    "frame_count": 1,
+    "gox": null,
+    "targets": [
+      "town_center_age2_front_x1",
+      "town_center_age2_center_x1",
+      "town_center_age2_back_x1",
+      "town_center_age2_shadow_x1",
+      "town_center_age3_front_x1",
+      "town_center_age3_center_x1",
+      "town_center_age3_back_x1",
+      "town_center_age3_shadow_x1",
+      "town_center_age4_front_x1",
+      "town_center_age4_center_x1",
+      "town_center_age4_back_x1",
+      "town_center_age4_shadow_x1"
+    ],
+    "tile_size": null
+  },
+  "feitoria": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "feitoria",
+    "margin": 10,
+    "targets": [
+      "b_medi_feitoria_x1"
+    ],
+    "tile_size": 5
+  },
+  "folwark1": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "folwark1",
+    "margin": 10,
+    "targets": [
+      "b_dark_folwark_age1_x1"
+    ],
+    "tile_size": 3
+  },
+  "folwark2": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "folwark2",
+    "margin": 10,
+    "targets": [
+      "b_slav_folwark_age2_x1"
+    ],
+    "tile_size": 3
+  },
+  "folwark3": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 100,
+    "frame_count_is_variants": false,
+    "gox": "folwark3",
+    "margin": 10,
+    "targets": [
+      "b_slav_folwark_age3_x1"
+    ],
+    "tile_size": 3
+  },
+  "fortifiedwall": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 5,
+    "frame_count_is_variants": true,
+    "gox": "fortifiedwall",
+    "margin": 0,
+    "targets": [
+      "wall_fortified_x1",
+      "gate_fortified_corner_x1"
+    ],
+    "tile_size": 1
+  },
+  "fortifiedwallf": {
+    "area_prefix": "areas",
+    "foundation": true,
+    "wall_style": true,
+    "targets": [
+      "wall_fortified_constr_x1",
+      "gate_fortified_corner_constr_x1"
+    ]
+  },
+  "house1": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 8,
+    "frame_count_is_variants": true,
+    "gox": "house1",
+    "margin": 10,
+    "targets": [
+      "b_dark_house_age1_x1"
+    ],
+    "tile_size": 2
+  },
+  "house2": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 8,
+    "frame_count_is_variants": true,
+    "gox": "house2",
+    "margin": 10,
+    "targets": [
+      "house_age2_x1"
+    ],
+    "tile_size": 2
+  },
+  "house3": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 8,
+    "frame_count_is_variants": true,
+    "gox": "house3",
+    "margin": 10,
+    "targets": [
+      "house_age3_x1"
+    ],
+    "tile_size": 2
+  },
+  "housef": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_misc_foundation_house_x1"
+    ]
+  },
+  "krepost": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "krepost1",
+    "margin": 10,
+    "targets": [
+      "b_slav_krepost_x1",
+      "b_slav_krepost_age3_x1"
+    ],
+    "tile_size": 3
+  },
+  "lumber": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "lumber",
+    "margin": 10,
+    "targets": [
+      "lumber_camp_age2_x1"
+    ],
+    "tile_size": 2
+  },
+  "lumberf": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_misc_foundation_lumber_camp_x1"
+    ]
+  },
+  "market2": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "market2",
+    "margin": 10,
+    "targets": [
+      "market_age2_x1"
+    ],
+    "tile_size": 4
+  },
+  "market3": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "market3",
+    "margin": 10,
+    "targets": [
+      "market_age3_x1",
+      "market_age4_x1"
+    ],
+    "tile_size": 4
+  },
+  "marketf": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_misc_foundation_market_x1"
+    ]
+  },
+  "mill1": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 200,
+    "frame_count_is_variants": false,
+    "gox": "mill1",
+    "margin": 10,
+    "targets": [
+      "b_dark_mill_age1_x1"
+    ],
+    "tile_size": 2
+  },
+  "mill2": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 200,
+    "frame_count_is_variants": false,
+    "gox": "mill2",
+    "margin": 10,
+    "targets": [
+      "mill_age2_x1"
+    ],
+    "tile_size": 2
+  },
+  "mill3": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 200,
+    "frame_count_is_variants": false,
+    "gox": "mill3",
+    "margin": 10,
+    "targets": [
+      "mill_age3_x1"
+    ],
+    "tile_size": 2
+  },
+  "millf": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_misc_foundation_mill_x1"
+    ]
+  },
+  "mining": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "mining",
+    "margin": 10,
+    "targets": [
+      "mining_camp_age2_x1"
+    ],
+    "tile_size": 2
+  },
+  "miningf": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_misc_foundation_mining_camp_x1"
+    ]
+  },
+  "monastery": {
+    "area_prefix": "monastery_areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "monastery",
+    "margin": 10,
+    "targets": [
+      "monastery_age3_x1"
+    ],
+    "tile_size": 3
+  },
+  "monasteryf": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_misc_foundation_monastery_x1"
+    ]
+  },
+  "outpost": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "outpost1",
+    "margin": 0,
+    "targets": [
+      "b_dark_outpost_age1_x1"
+    ],
+    "tile_size": 1
+  },
+  "palisade": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": false,
+    "frame_count": 5,
+    "frame_count_is_variants": false,
+    "gox": "palisade",
+    "margin": 0,
+    "targets": [
+      "b_dark_wall_palisade_x1"
+    ],
+    "tile_size": 1
+  },
+  "palisade22_closed": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": -45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "palisade2_closed",
+    "margin": 0,
+    "targets": [
+      "b_dark_gate_palisade_n_closed_x1"
+    ],
+    "tile_size": 2,
+    "destruction_targets": [
+      "b_dark_gate_palisade_n_destruction_x1"
+    ]
+  },
+  "palisade22_open": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": -135,
+    "destructible": false,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "palisade2_open",
+    "margin": 0,
+    "targets": [
+      "b_dark_gate_palisade_n_open_x1"
+    ],
+    "tile_size": 2
+  },
+  "palisade2_closed": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": 135,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "palisade2_closed",
+    "margin": 0,
+    "targets": [
+      "b_dark_gate_palisade_e_closed_x1"
+    ],
+    "tile_size": 2,
+    "destruction_targets": [
+      "b_dark_gate_palisade_e_destruction_x1"
+    ]
+  },
+  "palisade2_open": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": 135,
+    "destructible": false,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "palisade2_open",
+    "margin": 0,
+    "targets": [
+      "b_dark_gate_palisade_e_open_x1"
+    ],
+    "tile_size": 2
+  },
+  "palisade_gate_corner": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "palisade",
+    "margin": 0,
+    "targets": [
+      "b_dark_gate_palisade_corner_x1"
+    ],
+    "tile_size": 1
+  },
+  "settlement1": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "settlement1",
+    "margin": 10,
+    "targets": [
+      "b_dark_settlement_age1_x1"
+    ],
+    "tile_size": 3
+  },
+  "settlement2": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "settlement2",
+    "margin": 10,
+    "targets": [
+      "b_ande_settlement_age2_x1"
+    ],
+    "tile_size": 3
+  },
+  "settlement3": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "settlement3",
+    "margin": 10,
+    "targets": [
+      "b_ande_settlement_age3_x1"
+    ],
+    "tile_size": 3
+  },
+  "siege": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "siege",
+    "margin": 10,
+    "targets": [
+      "siege_workshop_age3_x1"
+    ],
+    "tile_size": 4
+  },
+  "siegef": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_misc_foundation_siege_workshop_x1"
+    ]
+  },
+  "stable2": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 100,
+    "frame_count_is_variants": false,
+    "gox": "stable2",
+    "margin": 10,
+    "targets": [
+      "stable_age2_x1"
+    ],
+    "tile_size": 3
+  },
+  "stable3": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 100,
+    "frame_count_is_variants": false,
+    "gox": "stable3",
+    "margin": 10,
+    "targets": [
+      "stable_age3_x1"
+    ],
+    "tile_size": 3
+  },
+  "stablef": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_misc_foundation_stable_2_x1",
+      "b_misc_foundation_stable_1_x1"
+    ]
+  },
+  "stone22_closed": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": -45,
+    "destructible": false,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "stone2_closed",
+    "margin": 0,
+    "targets": [
+      "gate_stone_n_closed_x1",
+      "gate_fortified_n_closed_x1"
+    ],
+    "tile_size": 2
+  },
+  "stone22_open": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": -45,
+    "destructible": false,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "stone2_open",
+    "margin": 0,
+    "targets": [
+      "gate_stone_n_open_x1",
+      "gate_fortified_n_open_x1"
+    ],
+    "tile_size": 2
+  },
+  "stone2_closed": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": false,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "stone2_closed",
+    "margin": 0,
+    "targets": [
+      "gate_stone_e_closed_x1",
+      "gate_fortified_e_closed_x1"
+    ],
+    "tile_size": 2
+  },
+  "stone2_open": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": false,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "stone2_open",
+    "margin": 0,
+    "targets": [
+      "gate_stone_e_open_x1",
+      "gate_fortified_e_open_x1"
+    ],
+    "tile_size": 2
+  },
+  "stonewall": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 5,
+    "frame_count_is_variants": true,
+    "gox": "stonewall",
+    "margin": 0,
+    "targets": [
+      "wall_stone_x1",
+      "gate_stone_corner_x1"
+    ],
+    "tile_size": 1
+  },
+  "stonewallf": {
+    "area_prefix": "areas",
+    "foundation": true,
+    "wall_style": true,
+    "targets": [
+      "wall_stone_constr_x1",
+      "gate_stone_corner_constr_x1"
+    ]
+  },
+  "tower1": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "tower1",
+    "margin": 0,
+    "targets": [
+      "tower_age2_x1"
+    ],
+    "tile_size": 1
+  },
+  "tower2": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "tower2",
+    "margin": 0,
+    "targets": [
+      "tower_age3_x1"
+    ],
+    "tile_size": 1
+  },
+  "tower3": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "tower3",
+    "margin": 0,
+    "targets": [
+      "tower_age4_x1"
+    ],
+    "tile_size": 1
+  },
+  "tower4": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "tower4",
+    "margin": 0,
+    "targets": [
+      "tower_bombard_x1"
+    ],
+    "tile_size": 1,
+    "box_from": "tower1"
+  },
+  "towncenter1": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "towncenter1",
+    "margin": 0,
+    "targets": [
+      "b_dark_town_center_age1_main_x1",
+      "b_dark_town_center_age1_x1"
+    ],
+    "tile_size": 4
+  },
+  "towncenter2": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "towncenter2",
+    "margin": 0,
+    "targets": [
+      "town_center_age2_main_x1",
+      "town_center_age2_x1"
+    ],
+    "tile_size": 4
+  },
+  "towncenter3": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "towncenter3",
+    "margin": 0,
+    "targets": [
+      "town_center_age3_main_x1",
+      "town_center_age3_x1"
+    ],
+    "tile_size": 4
+  },
+  "towncenter4": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "towncenter4",
+    "margin": 0,
+    "targets": [
+      "town_center_age4_main_x1",
+      "town_center_age4_x1"
+    ],
+    "tile_size": 4
+  },
+  "towncenterf": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_misc_foundation_town_center_x1"
+    ]
+  },
+  "university": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 120,
+    "frame_count_is_variants": false,
+    "gox": "university",
+    "margin": 10,
+    "targets": [
+      "university_age3_x1",
+      "university_age4_x1"
+    ],
+    "tile_size": 4
+  },
+  "universityf": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_misc_foundation_university_1_x1",
+      "b_misc_foundation_university_2_x1"
+    ]
+  },
+  "fortified_church": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "fortified_monastery",
+    "margin": 10,
+    "targets": [
+      "b_medi_fortified_church_x1"
+    ],
+    "tile_size": 3
+  },
+  "krepostf": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_misc_foundation_krepost_x1"
+    ]
+  },
+  "feitoriaf": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_misc_foundation_5x5_x1"
+    ]
+  },
+  "settlementf": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_misc_foundation_3x3_x1"
+    ]
+  },
+  "towerf": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_misc_foundation_tower_x1"
+    ]
+  },
+  "outpostf": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_misc_foundation_outpost_x1"
+    ]
+  },
+  "palisade_ne_closed": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": -45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "palisade_closed",
+    "margin": 0,
+    "targets": [
+      "b_dark_gate_palisade_ne_closed_x1"
+    ],
+    "tile_size": 2,
+    "footprint_axis": "ne",
+    "destruction_targets": [
+      "b_dark_gate_palisade_ne_destruction_x1"
+    ]
+  },
+  "palisade_se_closed": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "palisade_closed",
+    "margin": 0,
+    "targets": [
+      "b_dark_gate_palisade_se_closed_x1"
+    ],
+    "tile_size": 2,
+    "footprint_axis": "se",
+    "destruction_targets": [
+      "b_dark_gate_palisade_se_destruction_x1"
+    ]
+  },
+  "stone_ne_closed": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": -45,
+    "destructible": false,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "stone_closed",
+    "margin": 0,
+    "targets": [
+      "gate_stone_ne_closed_x1"
+    ],
+    "tile_size": 2,
+    "footprint_axis": "ne"
+  },
+  "stone_se_closed": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": false,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "stone_closed",
+    "margin": 0,
+    "targets": [
+      "gate_stone_se_closed_x1"
+    ],
+    "tile_size": 2,
+    "footprint_axis": "se"
+  },
+  "palisade_ne_open": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": -45,
+    "destructible": false,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "palisade_open",
+    "margin": 0,
+    "targets": [
+      "b_dark_gate_palisade_ne_open_x1"
+    ],
+    "tile_size": 2,
+    "footprint_axis": "ne"
+  },
+  "palisade_se_open": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": false,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "palisade_open",
+    "margin": 0,
+    "targets": [
+      "b_dark_gate_palisade_se_open_x1"
+    ],
+    "tile_size": 2,
+    "footprint_axis": "se"
+  },
+  "stone_ne_open": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": -45,
+    "destructible": false,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "stone_open",
+    "margin": 0,
+    "targets": [
+      "gate_stone_ne_open_x1"
+    ],
+    "tile_size": 2,
+    "footprint_axis": "ne"
+  },
+  "stone_se_open": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": false,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "stone_open",
+    "margin": 0,
+    "targets": [
+      "gate_stone_se_open_x1"
+    ],
+    "tile_size": 2,
+    "footprint_axis": "se"
+  },
+  "palisade_ne_closedf": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_dark_gate_palisade_ne_constr_x1"
+    ],
+    "construction_gox": "palisade_gate1_full",
+    "footprint": [
+      4,
+      1,
+      "ne"
+    ],
+    "stage_extra_levels": 1,
+    "base_frame": false,
+    "stage_fractions": [
+      0.2,
+      0.45,
+      0.6
+    ]
+  },
+  "palisade_se_closedf": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_dark_gate_palisade_se_constr_x1"
+    ],
+    "construction_gox": "palisade_gate1_full",
+    "footprint": [
+      4,
+      1,
+      "se"
+    ],
+    "stage_extra_levels": 1,
+    "base_frame": false,
+    "stage_fractions": [
+      0.2,
+      0.45,
+      0.6
+    ]
+  },
+  "stone_ne_closedf": {
+    "area_prefix": "areas",
+    "foundation": true,
+    "targets": [
+      "gate_stone_ne_constr_x1"
+    ],
+    "construction_gox": "stone_gate1_full",
+    "footprint": [
+      4,
+      1,
+      "ne"
+    ],
+    "base_frame": false
+  },
+  "stone_se_closedf": {
+    "area_prefix": "areas",
+    "foundation": true,
+    "targets": [
+      "gate_stone_se_constr_x1"
+    ],
+    "construction_gox": "stone_gate1_full",
+    "footprint": [
+      4,
+      1,
+      "se"
+    ],
+    "base_frame": false
+  },
+  "palisade_gate_cornerf": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_misc_foundation_1x1_x1"
+    ]
+  },
+  "palisade2_closedf": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_dark_gate_palisade_e_constr_x1"
+    ],
+    "stage_fractions": [
+      0.25,
+      0.5,
+      0.75
+    ]
+  },
+  "palisade22_closedf": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_dark_gate_palisade_n_constr_x1"
+    ],
+    "stage_fractions": [
+      0.25,
+      0.5,
+      0.75
+    ]
+  },
+  "stone2_closedf": {
+    "area_prefix": "areas",
+    "foundation": true,
+    "targets": [
+      "gate_stone_e_constr_x1",
+      "gate_fortified_e_constr_x1"
+    ],
+    "stage_fractions": [
+      0.25,
+      0.5,
+      0.75
+    ]
+  },
+  "stone22_closedf": {
+    "area_prefix": "areas",
+    "foundation": true,
+    "targets": [
+      "gate_stone_n_constr_x1",
+      "gate_fortified_n_constr_x1"
+    ],
+    "stage_fractions": [
+      0.25,
+      0.5,
+      0.75
+    ]
+  },
+  "fortified_ne_closed": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": -45,
+    "destructible": false,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "stone_closed",
+    "margin": 0,
+    "targets": [
+      "gate_fortified_ne_closed_x1"
+    ],
+    "tile_size": 2,
+    "footprint_axis": "ne"
+  },
+  "fortified_ne_open": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": -45,
+    "destructible": false,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "stone_open",
+    "margin": 0,
+    "targets": [
+      "gate_fortified_ne_open_x1"
+    ],
+    "tile_size": 2,
+    "footprint_axis": "ne"
+  },
+  "fortified_ne_closedf": {
+    "area_prefix": "areas",
+    "foundation": true,
+    "targets": [
+      "gate_fortified_ne_constr_x1"
+    ],
+    "construction_gox": "fortified_gate1_full",
+    "footprint": [
+      4,
+      1,
+      "ne"
+    ],
+    "base_frame": false
+  },
+  "fortified_se_closed": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": false,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "stone_closed",
+    "margin": 0,
+    "targets": [
+      "gate_fortified_se_closed_x1"
+    ],
+    "tile_size": 2,
+    "footprint_axis": "se"
+  },
+  "fortified_se_open": {
+    "area_prefix": "areas",
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": false,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "stone_open",
+    "margin": 0,
+    "targets": [
+      "gate_fortified_se_open_x1"
+    ],
+    "tile_size": 2,
+    "footprint_axis": "se"
+  },
+  "fortified_se_closedf": {
+    "area_prefix": "areas",
+    "foundation": true,
+    "targets": [
+      "gate_fortified_se_constr_x1"
+    ],
+    "construction_gox": "fortified_gate1_full",
+    "footprint": [
+      4,
+      1,
+      "se"
+    ],
+    "base_frame": false
+  },
+  "wonder": {
+    "area_prefix": null,
+    "camera_angle_x": 60,
+    "camera_angle_y": 45,
+    "destructible": true,
+    "frame_count": 1,
+    "frame_count_is_variants": false,
+    "gox": "wonder1",
+    "margin": 0,
+    "targets": [
+      "b_afri_wonder_ethiopians_x1",
+      "b_afri_wonder_malians_x1",
+      "b_ande_wonder_mapuche_x1",
+      "b_ande_wonder_muisca_x1",
+      "b_ande_wonder_tupi_x1",
+      "b_asia_wonder_chinese_x1",
+      "b_asia_wonder_japanese_x1",
+      "b_asia_wonder_jurchens_x1",
+      "b_asia_wonder_khitans_x1",
+      "b_asia_wonder_koreans_x1",
+      "b_asia_wonder_mongols_x1",
+      "b_asia_wonder_shu_x1",
+      "b_asia_wonder_vietnamese_x1",
+      "b_asia_wonder_wei_x1",
+      "b_asia_wonder_wu_x1",
+      "b_ceas_wonder_cumans_x1",
+      "b_ceas_wonder_tatars_x1",
+      "b_east_wonder_goths_x1",
+      "b_east_wonder_huns_x1",
+      "b_east_wonder_teutons_x1",
+      "b_east_wonder_vikings_x1",
+      "b_greek_wonder_athenians_x1",
+      "b_greek_wonder_macedonians_x1",
+      "b_greek_wonder_spartans_x1",
+      "b_indi_wonder_bengalis_x1",
+      "b_indi_wonder_gurjaras_x1",
+      "b_indi_wonder_hindustanis_x1",
+      "b_indi_wonder_indians_x1",
+      "b_medi_wonder_armenians_x1",
+      "b_medi_wonder_byzantines_x1",
+      "b_medi_wonder_georgians_x1",
+      "b_medi_wonder_italians_x1",
+      "b_medi_wonder_portuguese_x1",
+      "b_medi_wonder_sicilians_x1",
+      "b_medi_wonder_spanish_x1",
+      "b_meso_wonder_aztecs_x1",
+      "b_meso_wonder_incas_x1",
+      "b_meso_wonder_mayans_x1",
+      "b_nors_wonder_danes_x1",
+      "b_nors_wonder_varangians_x1",
+      "b_orie_wonder_berbers_x1",
+      "b_orie_wonder_persians_x1",
+      "b_orie_wonder_saracens_x1",
+      "b_orie_wonder_turks_x1",
+      "b_persian_wonder_achaemenids_x1",
+      "b_puru_wonder_puru_x1",
+      "b_scen_wonder_britons_x1",
+      "b_scen_wonder_slavs_x1",
+      "b_seas_wonder_burmese_x1",
+      "b_seas_wonder_khmer_x1",
+      "b_seas_wonder_malay_x1",
+      "b_slav_wonder_bohemians_x1",
+      "b_slav_wonder_bulgarians_x1",
+      "b_slav_wonder_lithuanians_x1",
+      "b_slav_wonder_magyars_x1",
+      "b_slav_wonder_poles_x1",
+      "b_slav_wonder_slavs_x1",
+      "b_thracian_wonder_thracians_x1",
+      "b_west_wonder_britons_x1",
+      "b_west_wonder_burgundians_x1",
+      "b_west_wonder_celts_x1",
+      "b_west_wonder_franks_x1",
+      "b_west_wonder_saxons_x1"
+    ],
+    "tile_size": 5
+  },
+  "wonderf": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_misc_foundation_wonder_x1"
+    ]
+  },
+  "palisadef": {
+    "area_prefix": null,
+    "foundation": true,
+    "targets": [
+      "b_misc_foundation_1x1_x1"
+    ],
+    "stage_fractions": [
+      0.09,
+      0.33,
+      0.66
+    ],
+    "base_frame": false
+  }
+}

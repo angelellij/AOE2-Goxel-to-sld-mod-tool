@@ -1,0 +1,99 @@
+{
+  "berry": {
+    "gox": "berry",
+    "targets": [
+      "n_forage_bush_x1",
+      "n_forage_fruit_x1",
+      "n_forage_papaya_x1",
+      "n_forage_pineapple_x1"
+    ],
+    "tile_size": 1
+  },
+  "berry33": {
+    "gox": "berry33",
+    "targets": [
+      "n_forage_bush_33_x1",
+      "n_forage_fruit_33_x1",
+      "n_forage_papaya_33_x1",
+      "n_forage_pineapple_33_x1"
+    ],
+    "tile_size": 1
+  },
+  "berry66": {
+    "gox": "berry66",
+    "targets": [
+      "n_forage_bush_66_x1",
+      "n_forage_fruit_66_x1",
+      "n_forage_papaya_66_x1",
+      "n_forage_pineapple_66_x1"
+    ],
+    "tile_size": 1
+  },
+  "gold": {
+    "gox": "gold",
+    "targets": [
+      "n_mine_gold_x1"
+    ],
+    "tile_size": 1
+  },
+  "stone": {
+    "gox": "stone",
+    "targets": [
+      "n_mine_stone_x1"
+    ],
+    "tile_size": 1
+  },
+  "tree": {
+    "gox": "tree",
+    "targets": [
+      "n_tree_acacia_x1",
+      "n_tree_autumn_oak_x1",
+      "n_tree_bamboo_x1",
+      "n_tree_birch_x1",
+      "n_tree_bush_a_x1",
+      "n_tree_bush_b_x1",
+      "n_tree_bush_c_x1",
+      "n_tree_cypress_x1",
+      "n_tree_dead_x1",
+      "n_tree_dragon_x1",
+      "n_tree_italian_pine_x1",
+      "n_tree_jungle_x1",
+      "n_tree_mangrove_x1",
+      "n_tree_oak_x1",
+      "n_tree_olive_x1",
+      "n_tree_palm_x1",
+      "n_tree_pine_x1",
+      "n_tree_rainforest_x1",
+      "n_tree_reeds_x1",
+      "n_tree_scenario_a_x1",
+      "n_tree_scenario_b_x1",
+      "n_tree_scenario_c_x1",
+      "n_tree_scenario_d_x1",
+      "n_tree_scenario_e_x1",
+      "n_tree_scenario_f_x1",
+      "n_tree_scenario_g_x1",
+      "n_tree_scenario_h_x1",
+      "n_tree_scenario_i_x1",
+      "n_tree_scenario_j_x1",
+      "n_tree_scenario_k_x1",
+      "n_tree_scenario_l_x1",
+      "n_tree_snow_autumn_oak_x1",
+      "n_tree_snow_pine_x1",
+      "n_tree_wax_palm_x1",
+      "n_tree_monkey_puzzle_x1",
+      "n_tree_green_oak_x1",
+      "n_tree_brazilwood_x1",
+      "n_tree_asian_maple_autumn_x1",
+      "n_tree_asian_maple_green_x1",
+      "n_tree_asian_pine_x1",
+      "n_tree_bush_d_x1",
+      "n_tree_cypress_decorative_x1",
+      "n_tree_lush_bamboo_x1",
+      "n_tree_peach_blossom_x1",
+      "n_tree_spruce_x1",
+      "n_tree_spruce_snow_x1",
+      "n_tree_willow_x1"
+    ],
+    "tile_size": 1
+  }
+}
