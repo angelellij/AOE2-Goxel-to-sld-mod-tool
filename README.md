@@ -1,4 +1,4 @@
-# AOE2 Checker mod tool
+# AOE2 Goxel to SLD tool
 
 Converts Goxel voxel models (`files-gox/*.gox`) into Age of Empires II:
 Definitive Edition `.sld` graphics and installs them straight into a local mod.
