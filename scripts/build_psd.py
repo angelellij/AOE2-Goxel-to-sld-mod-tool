@@ -51,7 +51,7 @@ def _footprint_pad(tile_x, tile_y, footprint):
 
 def build_layers(building_name, tile_size, angle_x=60, angle_y=45, model=None, crop_box=None, margin=0, gox_name=None, debug_dir=None, footprint=None, fit_footprint=False, shift_y=0):
     if model is None:
-        gox_path = f"{DIRS.MAIN}/{DIRS.GOX}/{gox_name or building_name}.gox"
+        gox_path = f"{DIRS.GOX_DIR}/{gox_name or building_name}.gox"
         model = read_gox(gox_path)
     passes = voxel_render.render(model, angle_x=angle_x, angle_y=angle_y)
     if debug_dir is not None:
@@ -163,7 +163,7 @@ def build_layers(building_name, tile_size, angle_x=60, angle_y=45, model=None, c
 
 
 def build_destruction_frames(building_name, tile_size, num_frames=5, angle_x=60, angle_y=45, margin=0, gox_name=None):
-    gox_path = f"{DIRS.MAIN}/{DIRS.GOX}/{gox_name or building_name}.gox"
+    gox_path = f"{DIRS.GOX_DIR}/{gox_name or building_name}.gox"
     base_model = read_gox(gox_path)
     base_passes = voxel_render.render(base_model, angle_x=angle_x, angle_y=angle_y)
     crop_box = base_passes["box_crop_px"]
@@ -234,7 +234,7 @@ def _foundation_frames(building_name, tile_size, angle_x, angle_y, foundation_na
     foundation_name = foundation_name or building_name
     import building_config
     living_gox = construction_gox or (building_config.load(building_name) or {}).get("gox") or building_name
-    living_model = read_gox(f"{DIRS.MAIN}/{DIRS.GOX}/{living_gox}.gox")
+    living_model = read_gox(f"{DIRS.GOX_DIR}/{living_gox}.gox")
     if rotate_90:
         living_model = GoxModel(voxels=_rotate_voxels_90(living_model.voxels), box=living_model.box)
     if construction_gox:
@@ -242,7 +242,7 @@ def _foundation_frames(building_name, tile_size, angle_x, angle_y, foundation_na
     living_passes = voxel_render.render(living_model, angle_x=angle_x, angle_y=angle_y)
     crop_box = living_passes["box_crop_px"]
 
-    foundation_path = f"{DIRS.MAIN}/{DIRS.GOX}/{foundation_name}0.gox"
+    foundation_path = f"{DIRS.GOX_DIR}/{foundation_name}0.gox"
     if base_frame and os.path.isfile(foundation_path):
         foundation_model = read_gox(foundation_path)
         foundation_model.box = living_model.box
@@ -317,7 +317,7 @@ def write_psd(layers, out_path, building_name, tile_size, debug_dir=None):
     canvas_width, canvas_height = scaled["Diffuse"].size
     anchor_x, anchor_y = layers["anchor"]
     ax, ay = anchor_x * AUTHOR_SCALE, anchor_y * AUTHOR_SCALE
-    margin = 40
+    margin = 20 * AUTHOR_SCALE
     canvas_size = int(2 * max(ax, ay, canvas_width - ax, canvas_height - ay) + margin)
     offset = (canvas_size / 2 - ax, canvas_size / 2 - ay)
 
@@ -364,6 +364,10 @@ def write_psd(layers, out_path, building_name, tile_size, debug_dir=None):
         normals_rgb=normals_rgb, normals_alpha=normals_alpha,
         player_color_mask=player_color,
     )
+    if AUTHOR_SCALE == 1:
+        # patch_shadow expects the mask at 2x and halves it; hand it an exact
+        # 2x copy so the halving gives back this 1x mask unchanged.
+        diamond_mask = np.kron(diamond_mask, np.ones((2, 2), dtype=diamond_mask.dtype))
     return canvas_size, diamond_mask
 
 

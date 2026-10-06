@@ -645,8 +645,7 @@
     "targets": [
       "b_dark_gate_palisade_n_open_x1"
     ],
-    "tile_size": 2,
-    "rotate_90": true
+    "tile_size": 2
   },
   "palisade2_closed": {
     "area_prefix": null,

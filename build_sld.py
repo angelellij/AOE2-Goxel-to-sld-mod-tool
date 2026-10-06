@@ -18,6 +18,11 @@ import build_psd
 import building_config
 import patch_shadow
 
+# SD mode (uhd false): author the PSDs at 1x and have DESpriteTool convert
+# them as-is, without the extra x1 downscale, so no _x2 is ever built.
+UHD = DIRS.SETTINGS.get("uhd", True)
+build_psd.AUTHOR_SCALE = 2 if UHD else 1
+
 _display_num_counter = itertools.count(100)
 _display_num_lock = threading.Lock()
 
@@ -27,7 +32,16 @@ def _next_display_num():
         return next(_display_num_counter)
 
 
-def convert_via_wine(src_dir, building_name, attempts=3):
+def _sprite_tool_command(relative_batch_dir):
+    """DESpriteTool runs natively on Windows; on Linux it goes through Wine,
+    inside a virtual X display (xvfb-run) so it can run headless and in
+    parallel."""
+    if DIRS.WINDOWS:
+        return [os.path.join(DIRS.SPRITES_TOOL, "DESpriteTool.exe"), relative_batch_dir]
+    return ["xvfb-run", "-n", str(_next_display_num()), "wine", "DESpriteTool.exe", relative_batch_dir]
+
+
+def convert_sprites(src_dir, building_name, attempts=3):
     batch_dir = f"{DIRS.SPRITES_TOOL}/buildings/aoe2checker_build/{building_name}_batch"
     dest_dir = f"{batch_dir}/{building_name}"
     relative_batch_dir = f"buildings/aoe2checker_build/{building_name}_batch"
@@ -42,18 +56,27 @@ def convert_via_wine(src_dir, building_name, attempts=3):
                 shutil.copy(f"{src_dir}/{fname}", dest_dir)
 
         with open(f"{batch_dir}/settings.json", "w") as f:
-            f.write("{}")
+            f.write("{}" if UHD else '{"GenerateX1Assets": false}')
 
-        display_num = _next_display_num()
         try:
             subprocess.run(
-                ["xvfb-run", "-n", str(display_num), "wine", "DESpriteTool.exe", relative_batch_dir],
+                _sprite_tool_command(relative_batch_dir),
                 cwd=DIRS.SPRITES_TOOL,
                 check=True,
                 capture_output=True,
                 text=True,
             )
             sld_files = [f for f in os.listdir(dest_dir) if f.endswith(".sld")]
+            if not UHD:
+                # without x1 generation DESpriteTool names its only output
+                # "<name>.sld"; built from a 1x PSD, it is the x1 asset
+                renamed = []
+                for f in sld_files:
+                    if not re.search(r"_x[12]\.sld$", f):
+                        os.replace(f"{dest_dir}/{f}", f"{dest_dir}/{f[:-4]}_x1.sld")
+                        f = f[:-4] + "_x1.sld"
+                    renamed.append(f)
+                sld_files = renamed
             if not sld_files:
                 raise RuntimeError(
                     f"DESpriteTool produced no .sld for {building_name} - check "
@@ -71,9 +94,16 @@ def convert_via_wine(src_dir, building_name, attempts=3):
 def install(dest_dir, sld_files, target_names, mod_name):
     graphics_dir = f"{DIRS.AOEMODS}{mod_name}{DIRS.AOEGRAPHICS}"
     os.makedirs(graphics_dir, exist_ok=True)
+    info_path = f"{DIRS.AOEMODS}{mod_name}/info.json"
+    if not os.path.isfile(info_path):
+        # the game only lists a local mod that has an info.json
+        with open(info_path, "w", encoding="utf-8") as f:
+            json.dump({"Author": "", "CacheStatus": 0, "Description": "", "Title": mod_name}, f)
     installed = []
     for sld_file in sld_files:
         variant = sld_file.rsplit("_", 1)[-1].split(".")[0]
+        if variant == "x2" and not UHD:
+            continue
         src = f"{dest_dir}/{sld_file}"
         for target in target_names:
             base = target[:-3] if target.endswith("_x1") else target
@@ -102,9 +132,7 @@ def build_and_install(building_name, tile_size=None, mod_name=DIRS.MOD_SLD_TEST,
     config = building_config.load(building_name)
     if config is None:
         raise ValueError(
-            f"no config/buildings/{building_name}.json - run "
-            f"gen_building_config.py, or check its gap report if "
-            f"{building_name!r} isn't in rename.py yet"
+            f"no {building_name!r} entry in config/buildings.json - add it there"
         )
     with tempfile.TemporaryDirectory(prefix=f"{building_name}_psd_") as psd_dir:
         first_path = f"{psd_dir}/{building_name}_0000.psd"
@@ -125,9 +153,9 @@ def build_and_install(building_name, tile_size=None, mod_name=DIRS.MOD_SLD_TEST,
             model = None
             if config.get("box_from") or config.get("rotate_90"):
                 from gox_reader import read_gox
-                model = read_gox(f"{DIRS.MAIN}/{DIRS.GOX}/{gox_name}.gox")
+                model = read_gox(f"{DIRS.GOX_DIR}/{gox_name}.gox")
                 if config.get("box_from"):
-                    model.box = read_gox(f"{DIRS.MAIN}/{DIRS.GOX}/{config['box_from']}.gox").box
+                    model.box = read_gox(f"{DIRS.GOX_DIR}/{config['box_from']}.gox").box
                 if config.get("rotate_90"):
                     model.voxels = build_psd._rotate_voxels_90(model.voxels)
             layers = build_psd.build_layers(
@@ -143,7 +171,7 @@ def build_and_install(building_name, tile_size=None, mod_name=DIRS.MOD_SLD_TEST,
             shutil.copy(first_path, f"{psd_dir}/{building_name}_{i:04d}.psd")
         print(f"[{building_name}] wrote {frame_count} frame(s) to {psd_dir}")
 
-        dest_dir, sld_files = convert_via_wine(psd_dir, building_name)
+        dest_dir, sld_files = convert_sprites(psd_dir, building_name)
         print(f"[{building_name}] converted: {sld_files}")
 
         if footprint_guide is not None:
@@ -169,7 +197,7 @@ def load_resource_config(key):
 def build_and_install_resource(key, mod_name=DIRS.MOD_SLD_TEST, frame_count=10, debug_dir=None):
     config = load_resource_config(key)
     if config is None:
-        raise ValueError(f"no {key!r} entry in config/resources.json - run gen_resource_config.py")
+        raise ValueError(f"no {key!r} entry in config/resources.json - add it there")
     tile_size = config["tile_size"]
     gox_name = config.get("gox") or key
 
@@ -182,7 +210,7 @@ def build_and_install_resource(key, mod_name=DIRS.MOD_SLD_TEST, frame_count=10, 
             shutil.copy(first_path, f"{psd_dir}/{key}_{i:04d}.psd")
         print(f"[{key}] wrote {frame_count} frame(s) to {psd_dir}")
 
-        dest_dir, sld_files = convert_via_wine(psd_dir, key)
+        dest_dir, sld_files = convert_sprites(psd_dir, key)
         print(f"[{key}] converted: {sld_files}")
 
         if footprint_guide is not None:
@@ -200,7 +228,7 @@ def build_and_install_destruction(building_name, mod_name=DIRS.MOD_SLD_TEST, num
     d_key = building_name + "d"
     config = building_config.load(building_name)
     if config is None:
-        raise ValueError(f"no config for {building_name!r} - run gen_building_config.py")
+        raise ValueError(f"no {building_name!r} entry in config/buildings.json - add it there")
     target_names = building_config.destruction_target_names(config)
 
     tile_size = config["tile_size"]
@@ -242,7 +270,7 @@ def build_and_install_destruction(building_name, mod_name=DIRS.MOD_SLD_TEST, num
             f"last stage x{stage_repeat * 3}, x{variant_count} shape variant(s)) to {psd_dir}"
         )
 
-        dest_dir, sld_files = convert_via_wine(psd_dir, d_key)
+        dest_dir, sld_files = convert_sprites(psd_dir, d_key)
         print(f"[{d_key}] converted: {sld_files}")
 
         if frame_guides:
@@ -258,7 +286,7 @@ def build_and_install_destruction(building_name, mod_name=DIRS.MOD_SLD_TEST, num
 def build_and_install_damage_states(building_name, mod_name=DIRS.MOD_SLD_TEST, debug_dir=None):
     config = building_config.load(building_name)
     if config is None:
-        raise ValueError(f"no config for {building_name!r} - run gen_building_config.py")
+        raise ValueError(f"no {building_name!r} entry in config/buildings.json - add it there")
     tile_size = config["tile_size"]
     angle_x = config.get("camera_angle_x", 60)
     angle_y = config.get("camera_angle_y", 45)
@@ -280,7 +308,7 @@ def build_and_install_damage_states(building_name, mod_name=DIRS.MOD_SLD_TEST, d
             _canvas_size, fg = build_psd.write_psd(layers, first_path, building_name, tile_size, debug_dir=debug_dir)
             for i in range(1, damage_frame_count):
                 shutil.copy(first_path, f"{psd_dir}/{d_key}_{i:04d}.psd")
-            dest_dir, sld_files = convert_via_wine(psd_dir, d_key)
+            dest_dir, sld_files = convert_sprites(psd_dir, d_key)
             print(f"[{d_key}] converted: {sld_files}")
             for sld_file in sld_files:
                 if sld_file.endswith("_x1.sld"):
@@ -301,7 +329,7 @@ def build_and_install_foundation(building_name, mod_name=DIRS.MOD_SLD_TEST, f_ke
 
     config = building_config.load(building_name)
     if config is None:
-        raise ValueError(f"no config for {building_name!r} - run gen_building_config.py")
+        raise ValueError(f"no {building_name!r} entry in config/buildings.json - add it there")
     tile_size = config["tile_size"]
     angle_x = config.get("camera_angle_x", 60)
     angle_y = f_config.get("camera_angle_y", config.get("camera_angle_y", 45))
@@ -339,7 +367,7 @@ def build_and_install_foundation(building_name, mod_name=DIRS.MOD_SLD_TEST, f_ke
                 frame_i += 1
         print(f"[{f_key}] wrote {frame_i} frame(s) ({len(frames)} stages cycled x{stage_repeat}) to {psd_dir}")
 
-        dest_dir, sld_files = convert_via_wine(psd_dir, f_key)
+        dest_dir, sld_files = convert_sprites(psd_dir, f_key)
         print(f"[{f_key}] converted: {sld_files}")
 
         if frame_guides:
@@ -371,9 +399,16 @@ def foundation_families(all_config=None):
 def build_many_foundation(mod_name=DIRS.MOD_SLD_TEST, workers=16, only_names=None, debug_dir=None):
     from concurrent.futures import ThreadPoolExecutor, as_completed
 
-    families = foundation_families()
+    all_config = building_config.load_all()
+    families = foundation_families(all_config)
     if only_names is not None:
         families = {f_key: name for f_key, name in families.items() if name in only_names}
+    missing = [f_key for f_key in families
+               if all_config[f_key].get("construction_gox")
+               and not os.path.isfile(f"{DIRS.GOX_DIR}/{all_config[f_key]['construction_gox']}.gox")]
+    if missing:
+        print(f"Skipping {len(missing)} foundation(s) with no construction .gox in {DIRS.GOX_DIR}: {', '.join(missing)}")
+        families = {f_key: name for f_key, name in families.items() if f_key not in missing}
     ok, failed = {}, {}
     with ThreadPoolExecutor(max_workers=workers) as pool:
         futures = {
@@ -474,10 +509,8 @@ if __name__ == "__main__":
             "after the frame they belong to - the exact pixels handed to the PSD, before "
             "conversion, for inspecting without opening a PSD editor.\n"
             "\n"
-            "config/buildings.json is a hand-editable config, not regenerated by this "
-            "script. After adding a new .gox or changing one you want picked up, run "
-            "gen_building_config.py yourself (it preserves your existing tile_size/"
-            "frame_count/camera_angle overrides, only fills in missing ones)."
+            "config/buildings.json is the only source of building names and settings: "
+            "to add a new .gox, add its entry there by hand."
         )
         sys.exit(1)
 
@@ -487,9 +520,18 @@ if __name__ == "__main__":
 
     all_config = building_config.load_all()
 
+    def has_gox(key):
+        return os.path.isfile(f"{DIRS.GOX_DIR}/{all_config[key].get('gox') or key}.gox")
+
     living_names = names or sorted(
         k for k, v in all_config.items() if not v.get("empty") and not v.get("foundation")
     )
+    if not names:
+        # A gox_dir with only some models builds just those; the rest are skipped.
+        skipped = [n for n in living_names if not has_gox(n)]
+        living_names = [n for n in living_names if has_gox(n)]
+        if skipped:
+            print(f"Skipping {len(skipped)} building(s) with no .gox in {DIRS.GOX_DIR}: {', '.join(skipped)}")
     ok, failed = build_many(living_names, workers=workers, debug_dir=debug_dir)
     _report("Living buildings", ok, failed, len(living_names))
 
@@ -505,7 +547,7 @@ if __name__ == "__main__":
 
     if not no_foundation:
         ok, failed = build_many_foundation(
-            workers=workers, only_names=set(names) if names else None, debug_dir=debug_dir,
+            workers=workers, only_names=set(names) if names else set(living_names), debug_dir=debug_dir,
         )
         total = len(ok) + len(failed)
         _report("Foundations", ok, failed, total)

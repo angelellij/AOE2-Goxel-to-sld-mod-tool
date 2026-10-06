@@ -62,7 +62,7 @@ def find_marker_cubes(model):
 def main():
     import glob
 
-    paths = sys.argv[1:] or sorted(glob.glob(f"{DIRS.MAIN}/{DIRS.GOX}/*.gox"))
+    paths = sys.argv[1:] or sorted(glob.glob(f"{DIRS.GOX_DIR}/*.gox"))
     total_files = 0
     total_cubes = 0
     errors = []
