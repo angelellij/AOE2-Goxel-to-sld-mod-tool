@@ -65,7 +65,7 @@ gox_dir = ""
 | Key | What it does |
 | --- | --- |
 | `mods_dir` | Your AoE2:DE `mods/local` folder. `<steam id>` is the long numeric folder inside `Games/Age of Empires 2 DE`. |
-| `mod` | Name of the mod folder the graphics are installed into. If it doesn't exist, it is created with a basic `info.json`. |
+| `mod` | Name of the mod folder the graphics are installed into. If it doesn't exist, it is created with a basic `info.json` (title only, no description or `thumbnail.png`; add those yourself before publishing). |
 | `uhd` | `true`: builds SD (`_x1`) and UHD (`_x2`) graphics. `false`: builds SD only, which is faster and makes the mod much smaller (about 2 GB instead of 12 GB). |
 | `gox_dir` | Folder with your own `.gox` models. Empty = `files-gox/` in this repo. File names must match the `gox` names in `config/buildings.json`. A full build only builds the buildings whose `.gox` is in this folder and skips the rest. |
 
@@ -109,7 +109,7 @@ it was already open).
   parameters). Edited by hand.
 - `config/areas.json`: civilization groups (each building is installed under
   the name of every civ in its group).
-- `config/resources.json`: resources (trees, mines, etc.).
+- `config/resources.json`: resources (berries, gold, stone). **Not built yet** by `build_sld.py`.
 
 `config/buildings.json` is the only source of building names and settings.
 To add a new `.gox`, add its entry there by hand.
@@ -117,10 +117,13 @@ To add a new `.gox`, add its entry there by hand.
 ## How it works
 
 The pipeline details (voxel rendering, PSD layers, footprint diamond, shadow,
-SLD format) are in [how_it_works.md](how_it_works.md).
+SLD format) are in [how_it_works.md](how_it_works.md) (in Spanish).
 
 ## Troubleshooting
 
+- **`gox_dir ... does not exist`**: the `gox_dir` path in
+  `config/settings.toml` is wrong. Note that `~` already means your home folder
+  (`~/files-gox`, not `~/home/<you>/files-gox`).
 - **`AoE2DE not found`**: the game is not in Steam's default location; add
   `game_dir` to `config/settings.toml`.
 - **The mod doesn't show up in the game**: make sure the folder is inside
