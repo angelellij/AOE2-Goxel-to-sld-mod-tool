@@ -194,6 +194,62 @@ def load_resource_config(key):
     return all_config.get(key)
 
 
+def _resource_model(config, key):
+    from gox_reader import read_gox
+    model = read_gox(f"{DIRS.GOX_DIR}/{config.get('gox') or key}.gox")
+    brightness = config.get("brightness", 1.0)
+    if brightness != 1.0:
+        # darken every voxel's RGB; pure-blue player-color markers stay as they are
+        model.voxels = {
+            pos: c if (c[0] == 0 and c[1] == 0 and c[2] > 0)
+            else (*(min(255, round(ch * brightness)) for ch in c[:3]), c[3])
+            for pos, c in model.voxels.items()
+        }
+    return model
+
+
+def make_thumbnail(key, mod_name, resource=False, size=(1920, 1080)):
+    """Writes <mod>/thumbnail.png: `key` rendered alone, centered on a white
+    16:9 canvas, with the footprint diamond as a translucent shadow like in
+    game and player color shown in red. Scaled up by the largest whole
+    factor that fits, with NEAREST so the pixel art stays sharp."""
+    from PIL import Image
+    if resource:
+        config = load_resource_config(key)
+        layers = build_psd.build_layers(key, config["tile_size"], model=_resource_model(config, key))
+    else:
+        config = building_config.load(key)
+        layers = build_psd.build_layers(
+            key, config["tile_size"], angle_x=config.get("camera_angle_x", 60),
+            angle_y=config.get("camera_angle_y", 45), margin=config.get("margin", 0),
+            gox_name=config.get("gox") or key,
+        )
+    diffuse = layers["Diffuse"]
+    w, h = diffuse.size
+    rgba = np.asarray(diffuse).copy()
+    player = np.asarray(layers["player_color"]).reshape(h, w) > 0
+    rgba[player, 0] = np.clip(rgba[player, 0].astype(int) * 3, 0, 255)
+    rgba[player, 1] //= 4
+    rgba[player, 2] //= 4
+    shadow = np.zeros((h, w, 4), np.uint8)
+    shadow[..., 3] = (np.asarray(layers["diamond"]).reshape(h, w) > 0) * 70
+    img = Image.new("RGBA", (w, h), (255, 255, 255, 255))
+    img = Image.alpha_composite(img, Image.fromarray(shadow))
+    img = Image.alpha_composite(img, Image.fromarray(rgba)).convert("RGB")
+    content = np.any(np.asarray(img) < 250, axis=2)
+    ys, xs = np.nonzero(content)
+    img = img.crop((xs.min(), ys.min(), xs.max() + 1, ys.max() + 1))
+    scale = max(1, int(min(size[0] * 0.6 / img.width, size[1] * 0.7 / img.height)))
+    img = img.resize((img.width * scale, img.height * scale), Image.NEAREST)
+    out = Image.new("RGB", size, (255, 255, 255))
+    out.paste(img, ((size[0] - img.width) // 2, (size[1] - img.height) // 2))
+    path = f"{DIRS.AOEMODS}{mod_name}/thumbnail.png"
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    out.save(path)
+    print(f"[{key}] thumbnail written to {path}")
+    return path
+
+
 def build_and_install_resource(key, mod_name=DIRS.MOD_RESOURCES, debug_dir=None):
     config = load_resource_config(key)
     if config is None:
@@ -204,17 +260,7 @@ def build_and_install_resource(key, mod_name=DIRS.MOD_RESOURCES, debug_dir=None)
 
     with tempfile.TemporaryDirectory(prefix=f"{key}_psd_") as psd_dir:
         first_path = f"{psd_dir}/{key}_0000.psd"
-        from gox_reader import read_gox
-        model = read_gox(f"{DIRS.GOX_DIR}/{gox_name}.gox")
-        brightness = config.get("brightness", 1.0)
-        if brightness != 1.0:
-            # darken every voxel's RGB; pure-blue player-color markers stay as they are
-            model.voxels = {
-                pos: c if (c[0] == 0 and c[1] == 0 and c[2] > 0)
-                else (*(min(255, round(ch * brightness)) for ch in c[:3]), c[3])
-                for pos, c in model.voxels.items()
-            }
-        layers = build_psd.build_layers(key, tile_size, model=model)
+        layers = build_psd.build_layers(key, tile_size, model=_resource_model(config, key))
         _canvas_size, footprint_guide = build_psd.write_psd(layers, first_path, key, tile_size, debug_dir=debug_dir)
 
         for i in range(1, frame_count):
@@ -551,6 +597,9 @@ if __name__ == "__main__":
                     failed[k] = e
                     print(f"[{k}] FAILED: {e}")
         _report("Resources", ok, failed, len(resource_keys))
+        thumb = DIRS.SETTINGS.get("thumbnail")
+        if thumb and load_resource_config(thumb):
+            make_thumbnail(thumb, DIRS.MOD_RESOURCES, resource=True)
         sys.exit(0)
 
     all_config = building_config.load_all()
@@ -586,3 +635,7 @@ if __name__ == "__main__":
         )
         total = len(ok) + len(failed)
         _report("Foundations", ok, failed, total)
+
+    thumb = DIRS.SETTINGS.get("thumbnail")
+    if thumb and building_config.load(thumb):
+        make_thumbnail(thumb, DIRS.MOD_SLD_TEST)

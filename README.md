@@ -72,6 +72,10 @@ gox_dir = ""
 # buildings.json / resources.json to use. Empty = the repo's own config/ files.
 buildings_config = ""
 resources_config = ""
+
+# Building or resource key to render as the mod's thumbnail.png (white 16:9).
+# Empty = no thumbnail. A resource key goes to resources_mod, a building key to mod.
+thumbnail = ""
 ```
 
 | Key | What it does |
@@ -83,6 +87,7 @@ resources_config = ""
 | `gox_dir` | Folder with your own `.gox` models. Empty = `files-gox/` in this repo. File names must match the `gox` names in the config files. A full build only builds the models found in this folder and skips the rest. |
 | `buildings_config` | Path to your own `buildings.json`. Empty = `config/buildings.json`. |
 | `resources_config` | Path to your own `resources.json`. Empty = `config/resources.json`. |
+| `thumbnail` | Key of a building or resource (e.g. `castle`, `berry`). At the end of a build it is rendered alone on a white 1920x1080 canvas and saved as the mod's `thumbnail.png`. A resource key is used by `--resources` runs (into `resources_mod`), a building key by building runs (into `mod`). Empty = no thumbnail. |
 
 The game install folder (`AoE2DE`, where `DESpriteTool.exe` is) is found
 automatically: on Linux from `mods_dir`, on Windows in Steam's default location.

@@ -23,3 +23,7 @@ gox_dir = ""
 # buildings.json / resources.json to use. Empty = the repo's own config/ files.
 buildings_config = ""
 resources_config = ""
+
+# Building or resource key to render as the mod's thumbnail.png (white 16:9).
+# Empty = no thumbnail. A resource key goes to resources_mod, a building key to mod.
+thumbnail = ""
