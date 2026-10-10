@@ -7,7 +7,9 @@
       "n_forage_papaya_x1",
       "n_forage_pineapple_x1"
     ],
-    "tile_size": 1
+    "tile_size": 1,
+    "frame_count": 16,
+    "brightness": 0.9
   },
   "berry33": {
     "gox": "berry33",
@@ -17,7 +19,9 @@
       "n_forage_papaya_33_x1",
       "n_forage_pineapple_33_x1"
     ],
-    "tile_size": 1
+    "tile_size": 1,
+    "frame_count": 16,
+    "brightness": 0.9
   },
   "berry66": {
     "gox": "berry66",
@@ -27,21 +31,27 @@
       "n_forage_papaya_66_x1",
       "n_forage_pineapple_66_x1"
     ],
-    "tile_size": 1
+    "tile_size": 1,
+    "frame_count": 16,
+    "brightness": 0.9
   },
   "gold": {
     "gox": "gold",
     "targets": [
       "n_mine_gold_x1"
     ],
-    "tile_size": 1
+    "tile_size": 1,
+    "frame_count": 16,
+    "brightness": 0.9
   },
   "stone": {
     "gox": "stone",
     "targets": [
       "n_mine_stone_x1"
     ],
-    "tile_size": 1
+    "tile_size": 1,
+    "frame_count": 16,
+    "brightness": 0.9
   },
   "tree": {
     "gox": "tree",
@@ -94,6 +104,69 @@
       "n_tree_spruce_snow_x1",
       "n_tree_willow_x1"
     ],
-    "tile_size": 1
+    "tile_size": 1,
+    "frame_count": 69,
+    "brightness": 0.9
+  },
+  "tree_big": {
+    "gox": "ombu",
+    "targets": [
+      "n_tree_baobab_x1"
+    ],
+    "tile_size": 1,
+    "frame_count": 45,
+    "brightness": 0.9
+  },
+  "tree_cut": {
+    "gox": "tree cut",
+    "targets": [
+      "n_tree_felled_generic_x1",
+      "n_tree_felled_baobab_x1",
+      "n_tree_felled_bamboo_x1",
+      "n_tree_felled_lush_bamboo_x1",
+      "n_tree_stump_generic_x1",
+      "n_tree_stump_baobab_x1",
+      "n_tree_stump_bamboo_x1",
+      "n_tree_stump_lush_bamboo_x1"
+    ],
+    "tile_size": 1,
+    "frame_count": 16,
+    "brightness": 0.9
+  },
+  "gold33": {
+    "gox": "gold33",
+    "targets": [
+      "n_mine_gold_33_x1"
+    ],
+    "tile_size": 1,
+    "frame_count": 16,
+    "brightness": 0.9
+  },
+  "gold66": {
+    "gox": "gold66",
+    "targets": [
+      "n_mine_gold_66_x1"
+    ],
+    "tile_size": 1,
+    "frame_count": 16,
+    "brightness": 0.9
+  },
+  "stone33": {
+    "gox": "stone33",
+    "targets": [
+      "n_mine_stone_33_x1"
+    ],
+    "tile_size": 1,
+    "frame_count": 16,
+    "brightness": 0.9
+  },
+  "stone66": {
+    "gox": "stone66",
+    "targets": [
+      "n_mine_stone_66_x1"
+    ],
+    "tile_size": 1,
+    "frame_count": 16,
+    "brightness": 0.9
   }
 }

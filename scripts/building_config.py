@@ -4,7 +4,9 @@ installs as."""
 import json
 import os
 
-CONFIG_PATH = os.path.join(os.path.dirname(__file__), "..", "config", "buildings.json")
+import DIRS
+
+CONFIG_PATH = DIRS.BUILDINGS_CONFIG
 AREAS_CONFIG_PATH = os.path.join(os.path.dirname(__file__), "..", "config", "areas.json")
 
 

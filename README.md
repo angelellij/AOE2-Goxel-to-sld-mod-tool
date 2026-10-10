@@ -43,31 +43,46 @@ pip install numpy pillow psd-tools pytoshop six
 
 ## Configuration
 
-Everything that depends on your machine lives in `config/settings.toml`. Only
-two things are needed: your mods folder and the mod name.
+Settings live in `settings.toml` at the repo root. It is git-ignored, so every
+user keeps their own. To create it, copy the defaults:
+
+```bash
+cp default_settings.toml settings.toml
+```
+
+If there is no `settings.toml`, the tool uses `default_settings.toml` as-is.
 
 ```toml
-# AoE2:DE "mods/local" folder.
-# Linux:   ~/.local/share/Steam/steamapps/compatdata/813780/pfx/drive_c/users/steamuser/Games/Age of Empires 2 DE/<steam id>/mods/local
-# Windows: C:/Users/<you>/Games/Age of Empires 2 DE/<steam id>/mods/local
-mods_dir = "..."
+# AoE2:DE "mods/local" folder. Empty = auto-detect the standard location
+# (works when there is a single Steam profile).
+mods_dir = ""
 
 # Mod folder inside mods_dir where every build is installed.
 mod = "Power - Checker buildings SD"
+
+# Mod folder inside mods_dir where the resources are installed (build_sld.py --resources).
+resources_mod = "Power - Checker resources SD"
 
 # true = also build UHD (_x2) graphics. false = SD only (_x1): faster, much smaller mod.
 uhd = false
 
 # Folder with the .gox models. Empty = the repo's own files-gox folder.
 gox_dir = ""
+
+# buildings.json / resources.json to use. Empty = the repo's own config/ files.
+buildings_config = ""
+resources_config = ""
 ```
 
 | Key | What it does |
 | --- | --- |
-| `mods_dir` | Your AoE2:DE `mods/local` folder. `<steam id>` is the long numeric folder inside `Games/Age of Empires 2 DE`. |
-| `mod` | Name of the mod folder the graphics are installed into. If it doesn't exist, it is created with a basic `info.json` (title only, no description or `thumbnail.png`; add those yourself before publishing). |
+| `mods_dir` | Your AoE2:DE `mods/local` folder. Empty = auto-detected (Linux: inside Steam's Proton prefix, Windows: `C:/Users/<you>/Games/Age of Empires 2 DE/<steam id>/mods/local`). Set it if you have more than one Steam profile. |
+| `mod` | Name of the mod folder the buildings are installed into. If it doesn't exist, it is created with a basic `info.json` (title only, no description or `thumbnail.png`; add those yourself before publishing). |
+| `resources_mod` | Name of the mod folder the resources (`--resources`) are installed into. Kept separate from the buildings mod. |
 | `uhd` | `true`: builds SD (`_x1`) and UHD (`_x2`) graphics. `false`: builds SD only, which is faster and makes the mod much smaller (about 2 GB instead of 12 GB). |
-| `gox_dir` | Folder with your own `.gox` models. Empty = `files-gox/` in this repo. File names must match the `gox` names in `config/buildings.json`. A full build only builds the buildings whose `.gox` is in this folder and skips the rest. |
+| `gox_dir` | Folder with your own `.gox` models. Empty = `files-gox/` in this repo. File names must match the `gox` names in the config files. A full build only builds the models found in this folder and skips the rest. |
+| `buildings_config` | Path to your own `buildings.json`. Empty = `config/buildings.json`. |
+| `resources_config` | Path to your own `resources.json`. Empty = `config/resources.json`. |
 
 The game install folder (`AoE2DE`, where `DESpriteTool.exe` is) is found
 automatically: on Linux from `mods_dir`, on Windows in Steam's default location.
@@ -93,6 +108,9 @@ uv run build_sld.py --name monastery --name castle
 # Save every frame's layers as PNGs in debug/ to inspect them.
 uv run build_sld.py --name castle --debug
 
+# Resources only (berries, gold, stone, trees) into resources_mod.
+uv run build_sld.py --resources
+
 # Number of parallel jobs (default 16).
 uv run build_sld.py --workers 8
 ```
@@ -109,7 +127,7 @@ it was already open).
   parameters). Edited by hand.
 - `config/areas.json`: civilization groups (each building is installed under
   the name of every civ in its group).
-- `config/resources.json`: resources (berries, gold, stone). **Not built yet** by `build_sld.py`.
+- `config/resources.json`: resources (berries, gold, stone, trees) and the game graphics each one replaces, with their `frame_count`. Built with `--resources`.
 
 `config/buildings.json` is the only source of building names and settings.
 To add a new `.gox`, add its entry there by hand.
@@ -121,11 +139,13 @@ SLD format) are in [how_it_works.md](how_it_works.md) (in Spanish).
 
 ## Troubleshooting
 
-- **`gox_dir ... does not exist`**: the `gox_dir` path in
-  `config/settings.toml` is wrong. Note that `~` already means your home folder
+- **`gox_dir ... does not exist`** (or `buildings_config` / `resources_config`):
+  the path in `settings.toml` is wrong. Note that `~` already means your home folder
   (`~/files-gox`, not `~/home/<you>/files-gox`).
 - **`AoE2DE not found`**: the game is not in Steam's default location; add
-  `game_dir` to `config/settings.toml`.
+  `game_dir` to `settings.toml`.
+- **`could not auto-detect the mods folder`**: set `mods_dir` in
+  `settings.toml`.
 - **The mod doesn't show up in the game**: make sure the folder is inside
   `mods/local` and has an `info.json`.
 - **Linux: conversion fails**: check that `wine` and `xvfb-run` work from the

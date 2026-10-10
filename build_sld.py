@@ -132,7 +132,7 @@ def build_and_install(building_name, tile_size=None, mod_name=DIRS.MOD_SLD_TEST,
     config = building_config.load(building_name)
     if config is None:
         raise ValueError(
-            f"no {building_name!r} entry in config/buildings.json - add it there"
+            f"no {building_name!r} entry in {building_config.CONFIG_PATH} - add it there"
         )
     with tempfile.TemporaryDirectory(prefix=f"{building_name}_psd_") as psd_dir:
         first_path = f"{psd_dir}/{building_name}_0000.psd"
@@ -185,7 +185,7 @@ def build_and_install(building_name, tile_size=None, mod_name=DIRS.MOD_SLD_TEST,
         return installed
 
 
-RESOURCE_CONFIG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config", "resources.json")
+RESOURCE_CONFIG_PATH = DIRS.RESOURCES_CONFIG
 
 
 def load_resource_config(key):
@@ -194,16 +194,27 @@ def load_resource_config(key):
     return all_config.get(key)
 
 
-def build_and_install_resource(key, mod_name=DIRS.MOD_SLD_TEST, frame_count=10, debug_dir=None):
+def build_and_install_resource(key, mod_name=DIRS.MOD_RESOURCES, debug_dir=None):
     config = load_resource_config(key)
     if config is None:
-        raise ValueError(f"no {key!r} entry in config/resources.json - add it there")
+        raise ValueError(f"no {key!r} entry in {RESOURCE_CONFIG_PATH} - add it there")
+    frame_count = config.get("frame_count", 1)
     tile_size = config["tile_size"]
     gox_name = config.get("gox") or key
 
     with tempfile.TemporaryDirectory(prefix=f"{key}_psd_") as psd_dir:
         first_path = f"{psd_dir}/{key}_0000.psd"
-        layers = build_psd.build_layers(key, tile_size, gox_name=gox_name)
+        from gox_reader import read_gox
+        model = read_gox(f"{DIRS.GOX_DIR}/{gox_name}.gox")
+        brightness = config.get("brightness", 1.0)
+        if brightness != 1.0:
+            # darken every voxel's RGB; pure-blue player-color markers stay as they are
+            model.voxels = {
+                pos: c if (c[0] == 0 and c[1] == 0 and c[2] > 0)
+                else (*(min(255, round(ch * brightness)) for ch in c[:3]), c[3])
+                for pos, c in model.voxels.items()
+            }
+        layers = build_psd.build_layers(key, tile_size, model=model)
         _canvas_size, footprint_guide = build_psd.write_psd(layers, first_path, key, tile_size, debug_dir=debug_dir)
 
         for i in range(1, frame_count):
@@ -228,7 +239,7 @@ def build_and_install_destruction(building_name, mod_name=DIRS.MOD_SLD_TEST, num
     d_key = building_name + "d"
     config = building_config.load(building_name)
     if config is None:
-        raise ValueError(f"no {building_name!r} entry in config/buildings.json - add it there")
+        raise ValueError(f"no {building_name!r} entry in {building_config.CONFIG_PATH} - add it there")
     target_names = building_config.destruction_target_names(config)
 
     tile_size = config["tile_size"]
@@ -286,7 +297,7 @@ def build_and_install_destruction(building_name, mod_name=DIRS.MOD_SLD_TEST, num
 def build_and_install_damage_states(building_name, mod_name=DIRS.MOD_SLD_TEST, debug_dir=None):
     config = building_config.load(building_name)
     if config is None:
-        raise ValueError(f"no {building_name!r} entry in config/buildings.json - add it there")
+        raise ValueError(f"no {building_name!r} entry in {building_config.CONFIG_PATH} - add it there")
     tile_size = config["tile_size"]
     angle_x = config.get("camera_angle_x", 60)
     angle_y = config.get("camera_angle_y", 45)
@@ -324,12 +335,12 @@ def build_and_install_foundation(building_name, mod_name=DIRS.MOD_SLD_TEST, f_ke
     f_key = f_key or (building_name + "f")
     f_config = building_config.load(f_key)
     if f_config is None:
-        raise ValueError(f"no {f_key!r} entry in config/buildings.json - no foundation target to install as")
+        raise ValueError(f"no {f_key!r} entry in {building_config.CONFIG_PATH} - no foundation target to install as")
     target_names = building_config.target_names(f_config)
 
     config = building_config.load(building_name)
     if config is None:
-        raise ValueError(f"no {building_name!r} entry in config/buildings.json - add it there")
+        raise ValueError(f"no {building_name!r} entry in {building_config.CONFIG_PATH} - add it there")
     tile_size = config["tile_size"]
     angle_x = config.get("camera_angle_x", 60)
     angle_y = f_config.get("camera_angle_y", config.get("camera_angle_y", 45))
@@ -487,6 +498,7 @@ if __name__ == "__main__":
             return value
         return default
 
+    resources = pop_flag("--resources")
     no_destruction = pop_flag("--no-des")
     no_foundation = pop_flag("--no-foun")
     debug = pop_flag("--debug")
@@ -499,7 +511,8 @@ if __name__ == "__main__":
 
     if argv:
         print(
-            f"usage: {sys.argv[0]} [--name BUILDING]... [--no-des] [--no-foun] [--debug] [--workers N]\n"
+            f"usage: {sys.argv[0]} [--resources] [--name BUILDING]... [--no-des] [--no-foun] [--debug] [--workers N]\n"
+            "--resources builds the resources in config/resources.json (into resources_mod) instead of the buildings.\n"
             "No args builds everything: every living building, every destructible "
             "building's destruction animation, and every foundation family, all read "
             "from config/buildings.json as-is.\n"
@@ -517,6 +530,28 @@ if __name__ == "__main__":
     debug_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "debug") if debug else None
     if debug_dir is not None:
         print(f"--debug: dumping layer PNGs to {debug_dir}")
+
+    if resources:
+        with open(RESOURCE_CONFIG_PATH) as f:
+            resource_keys = names or sorted(json.load(f))
+        if not names:
+            skipped = [k for k in resource_keys if not os.path.isfile(f"{DIRS.GOX_DIR}/{load_resource_config(k).get('gox') or k}.gox")]
+            resource_keys = [k for k in resource_keys if k not in skipped]
+            if skipped:
+                print(f"Skipping {len(skipped)} resource(s) with no .gox in {DIRS.GOX_DIR}: {', '.join(skipped)}")
+        from concurrent.futures import ThreadPoolExecutor, as_completed
+        ok, failed = {}, {}
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            futures = {pool.submit(build_and_install_resource, k, DIRS.MOD_RESOURCES, debug_dir): k for k in resource_keys}
+            for future in as_completed(futures):
+                k = futures[future]
+                try:
+                    ok[k] = future.result()
+                except Exception as e:
+                    failed[k] = e
+                    print(f"[{k}] FAILED: {e}")
+        _report("Resources", ok, failed, len(resource_keys))
+        sys.exit(0)
 
     all_config = building_config.load_all()
 

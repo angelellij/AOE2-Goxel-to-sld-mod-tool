@@ -1,0 +1,25 @@
+# Default settings. To customize, copy this file to settings.toml (same folder)
+# and edit the copy; settings.toml is git-ignored. Without a settings.toml the
+# tool uses this file as-is.
+
+# AoE2:DE "mods/local" folder. Empty = auto-detect the standard location
+# (works when there is a single Steam profile):
+# Linux:   ~/.local/share/Steam/steamapps/compatdata/813780/pfx/drive_c/users/steamuser/Games/Age of Empires 2 DE/<steam id>/mods/local
+# Windows: C:/Users/<you>/Games/Age of Empires 2 DE/<steam id>/mods/local
+mods_dir = ""
+
+# Mod folder inside mods_dir where every build is installed.
+mod = "Power - Checker buildings SD"
+
+# Mod folder inside mods_dir where the resources are installed (build_sld.py --resources).
+resources_mod = "Power - Checker resources SD"
+
+# true = also build UHD (_x2) graphics. false = SD only (_x1): faster, much smaller mod.
+uhd = false
+
+# Folder with the .gox models. Empty = the repo's own files-gox folder.
+gox_dir = ""
+
+# buildings.json / resources.json to use. Empty = the repo's own config/ files.
+buildings_config = ""
+resources_config = ""
