@@ -81,7 +81,7 @@ thumbnail = ""
 | Key | What it does |
 | --- | --- |
 | `mods_dir` | Your AoE2:DE `mods/local` folder. Empty = auto-detected (Linux: inside Steam's Proton prefix, Windows: `C:/Users/<you>/Games/Age of Empires 2 DE/<steam id>/mods/local`). Set it if you have more than one Steam profile. |
-| `mod` | Name of the mod folder the buildings are installed into. If it doesn't exist, it is created with a basic `info.json` (title only, no description or `thumbnail.png`; add those yourself before publishing). |
+| `mod` | Name of the mod folder the buildings are installed into. If it doesn't exist, it is created with a basic `info.json` (title only; add the author and description yourself before publishing, and set `thumbnail` to also get a `thumbnail.png`). |
 | `resources_mod` | Name of the mod folder the resources (`--resources`) are installed into. Kept separate from the buildings mod. |
 | `uhd` | `true`: builds SD (`_x1`) and UHD (`_x2`) graphics. `false`: builds SD only, which is faster and makes the mod much smaller (about 2 GB instead of 12 GB). |
 | `gox_dir` | Folder with your own `.gox` models. Empty = `files-gox/` in this repo. File names must match the `gox` names in the config files. A full build only builds the models found in this folder and skips the rest. |
