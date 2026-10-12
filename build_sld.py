@@ -41,10 +41,14 @@ def _sprite_tool_command(relative_batch_dir):
     return ["xvfb-run", "-n", str(_next_display_num()), "wine", "DESpriteTool.exe", relative_batch_dir]
 
 
-def convert_sprites(src_dir, building_name, attempts=3):
-    batch_dir = f"{DIRS.SPRITES_TOOL}/buildings/aoe2checker_build/{building_name}_batch"
+def convert_sprites(src_dir, building_name, attempts=3, category="buildings"):
+    """`category` is the DESpriteTool folder the batch runs under, which picks
+    its settings.json: "buildings" (damage layer on) or "nature" (damage off,
+    no player color - what the game's own trees/bushes/mines use; a damage
+    layer on a resource makes the game draw it darkened)."""
+    batch_dir = f"{DIRS.SPRITES_TOOL}/{category}/aoe2checker_build/{building_name}_batch"
     dest_dir = f"{batch_dir}/{building_name}"
-    relative_batch_dir = f"buildings/aoe2checker_build/{building_name}_batch"
+    relative_batch_dir = f"{category}/aoe2checker_build/{building_name}_batch"
 
     last_error = None
     for attempt in range(1, attempts + 1):
@@ -267,7 +271,7 @@ def build_and_install_resource(key, mod_name=DIRS.MOD_RESOURCES, debug_dir=None)
             shutil.copy(first_path, f"{psd_dir}/{key}_{i:04d}.psd")
         print(f"[{key}] wrote {frame_count} frame(s) to {psd_dir}")
 
-        dest_dir, sld_files = convert_sprites(psd_dir, key)
+        dest_dir, sld_files = convert_sprites(psd_dir, key, category="nature")
         print(f"[{key}] converted: {sld_files}")
 
         if footprint_guide is not None:

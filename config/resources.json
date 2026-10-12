@@ -42,7 +42,7 @@
     ],
     "tile_size": 1,
     "frame_count": 16,
-    "brightness": 0.9
+    "brightness": 0.7
   },
   "stone": {
     "gox": "stone",
@@ -106,7 +106,7 @@
     ],
     "tile_size": 1,
     "frame_count": 69,
-    "brightness": 0.9
+    "brightness": 1
   },
   "tree_big": {
     "gox": "ombu",
@@ -115,7 +115,7 @@
     ],
     "tile_size": 1,
     "frame_count": 45,
-    "brightness": 0.9
+    "brightness": 1
   },
   "tree_cut": {
     "gox": "tree cut",
@@ -131,7 +131,7 @@
     ],
     "tile_size": 1,
     "frame_count": 16,
-    "brightness": 0.9
+    "brightness": 1
   },
   "gold33": {
     "gox": "gold33",
@@ -140,7 +140,7 @@
     ],
     "tile_size": 1,
     "frame_count": 16,
-    "brightness": 0.9
+    "brightness": 0.7
   },
   "gold66": {
     "gox": "gold66",
@@ -149,7 +149,7 @@
     ],
     "tile_size": 1,
     "frame_count": 16,
-    "brightness": 0.9
+    "brightness": 0.7
   },
   "stone33": {
     "gox": "stone33",
