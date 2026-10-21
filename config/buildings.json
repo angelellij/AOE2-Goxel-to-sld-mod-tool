@@ -328,7 +328,7 @@
     "camera_angle_x": 60,
     "camera_angle_y": 45,
     "destructible": true,
-    "frame_count": 1,
+    "frame_count": 100,
     "frame_count_is_variants": false,
     "gox": "folwark2",
     "margin": 10,

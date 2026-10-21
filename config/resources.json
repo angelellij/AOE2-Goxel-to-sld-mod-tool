@@ -123,11 +123,7 @@
       "n_tree_felled_generic_x1",
       "n_tree_felled_baobab_x1",
       "n_tree_felled_bamboo_x1",
-      "n_tree_felled_lush_bamboo_x1",
-      "n_tree_stump_generic_x1",
-      "n_tree_stump_baobab_x1",
-      "n_tree_stump_bamboo_x1",
-      "n_tree_stump_lush_bamboo_x1"
+      "n_tree_felled_lush_bamboo_x1"
     ],
     "tile_size": 1,
     "frame_count": 16,
